@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prueba del DOM</title>
+</head>
+<body>
+    <h1 id="titulo">Hola Mundo</h1>
+    <p>Este es un párrafo.</p>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+script.js:
+document.querySelector("#titulo").innerText = "Texto cambiado con VS Code y Live Server";
