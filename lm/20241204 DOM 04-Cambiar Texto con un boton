@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manipulando el DOM</title>
+</head>
+<body>
+    <h1 id="titulo">Título original</h1>
+    <button id="cambiarTexto">Cambiar texto</button>
+
+    <script>
+        const boton = document.querySelector("#cambiarTexto");
+        boton.addEventListener("click", () => {
+            const titulo = document.querySelector("#titulo");
+            titulo.innerHTML = "¡Texto cambiado!";
+        });
+    </script>
+</body>
+</html>
