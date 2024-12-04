@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ejercicio 1</title>
+</head>
+<body>
+    <h1>Ejercicio: Crear elementos dinámicos</h1>
+    <ul id="lista">
+        <li>Elemento inicial</li>
+    </ul>
+    <button id="agregar">Agregar elemento</button>
+
+    <script>
+        const boton = document.querySelector("#agregar");
+        boton.addEventListener("click", () => {
+            const lista = document.querySelector("#lista");
+            const nuevoElemento = document.createElement("li");
+            nuevoElemento.textContent = "Nuevo elemento";
+            lista.appendChild(nuevoElemento);
+        });
+    </script>
+</body>
+</html>
