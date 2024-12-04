@@ -1,0 +1,69 @@
+1. Instalar Visual Studio Code
+* Descarga e instala Visual Studio Code desde su [sitio oficial](https://code.visualstudio.com/).
+
+
+2. Crear un Proyecto o Carpeta de Trabajo
+* Abre Visual Studio Code.
+* Crea una nueva carpeta en tu computadora para tu proyecto (por ejemplo, `MiProyectoWeb`).
+* En Visual Studio Code, haz clic en **File > Open Folder** (Archivo > Abrir Carpeta) y selecciona tu carpeta `MiProyectoWeb`.
+
+---
+
+3. Crear Archivos HTML y JavaScript
+
+* Archivo HTML**:
+   - Haz clic en el botón `+` de la barra superior para crear un archivo nuevo.
+   - Escribe el nombre `index.html` y guárdalo.
+* Archivo JavaScript**:
+   - Haz clic en el botón `+` de nuevo para crear otro archivo.
+   - Escribe el nombre `script.js` y guárdalo.
+
+---
+
+4. Escribir el Código
+
+* En `index.html`:
+   Copia este código como base:
+<pre>
+   <!DOCTYPE html>
+   <html lang="es">
+   <head>
+       <title>Mi Proyecto Web</title>
+   </head>
+   <body>
+       <h1>Hola Mundo</h1>
+   </body>
+   </html>
+</pre>
+
+
+2. **En `script.js`**:
+   Copia este código como base:
+<pre>
+   function mostrarMensaje() {
+       alert("¡Hola, este es tu primer mensaje en JavaScript!");
+   }
+</pre>
+
+---
+
+5. Abrir el Archivo en el Navegador
+
+* Haz clic derecho sobre `index.html` en Visual Studio Code.
+* Selecciona **Open With Live Server** (Abrir con Live Server).
+   - Si no tienes Live Server instalado:
+     - Ve al menú **Extensions** (Extensiones) a la izquierda.
+     - Busca `Live Server` e instálalo.
+   - Después de instalarlo, reinicia Visual Studio Code e intenta nuevamente.
+* Tu página se abrirá en el navegador. Si haces clic en el botón, el mensaje del archivo JavaScript aparecerá.
+
+---
+
+6. Modificar y Guardar Cambios
+- Cada vez que hagas un cambio en los archivos, guárdalo (**Ctrl + S**) y recarga el navegador para ver los cambios (si no usas Live Server, usa F5 en el navegador).
+
+---
+
+*Sugerencias:**
+- **a.** ¿Quieres aprender cómo usar más funciones de JavaScript, como DOM o eventos avanzados?  
+- **b.** ¿Necesitas ayuda con errores o depuración en tu código HTML o JavaScript?
