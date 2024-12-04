@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ejercicio 2</title>
+</head>
+<body>
+    <h1>Ejercicio: Cambiar estilos</h1>
+    <button id="cambiarColor">Cambiar color de fondo</button>
+
+    <script>
+        const boton = document.querySelector("#cambiarColor");
+        boton.addEventListener("click", () => {
+            const colores = ["red", "blue", "green", "yellow", "purple"];
+            const colorAleatorio = colores[Math.floor(Math.random() * colores.length)];
+            document.body.style.backgroundColor = colorAleatorio;
+        });
+    </script>
+</body>
+</html>
