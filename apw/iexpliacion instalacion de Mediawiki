@@ -1,0 +1,239 @@
+---
+
+El archivo `compose.yml` es un archivo de configuración para **Docker Compose**, que define un conjunto de servicios que se desplegarán en contenedores Docker. Vamos a desglosarlo:
+
+---
+
+### Servicios Definidos:
+
+#### 1. **mediawiki**
+- Este servicio configura un contenedor para **MediaWiki** (el software utilizado para wikis como Wikipedia).
+- **`image: mediawiki`**: Utiliza la imagen oficial de MediaWiki.
+- **`restart: always`**: Configura el contenedor para reiniciarse automáticamente si se detiene.
+- **`networks`**: Conecta este contenedor a la red `mediawiki_network`.
+- **`ports: 8081:80`**: Mapea el puerto 80 del contenedor (donde corre MediaWiki) al puerto 8081 del host.
+- **`volumes: /var/www/html/`**: Monta el directorio del host (`/var/www/html/`) como volumen, posiblemente para almacenar datos persistentes de MediaWiki.
+
+#### 2. **mediawiki-db**
+- Este servicio configura una base de datos MySQL para almacenar datos de MediaWiki.
+- **`image: mysql:5.7`**: Utiliza la versión 5.7 de la imagen oficial de MySQL.
+- **`restart: always`**: Reinicia automáticamente si el contenedor falla.
+- **`networks`**: Conecta este contenedor a `mediawiki_network`.
+- **`environment`**:
+  - **`MYSQL_DATABASE`**: Nombre de la base de datos que se creará (`wiki_db`).
+  - **`MYSQL_ROOT_PASSWORD`**: Contraseña para el usuario root de MySQL (`Nohay2sin3`).
+  - **`MYSQL_USER`**: Usuario adicional (`wikimedia`).
+  - **`MYSQL_PASSWORD`**: Contraseña para el usuario adicional (`wikimedia`).
+- **`volumes: /var/lib/`**: Monta un volumen para la persistencia de datos de la base de datos.
+
+#### 3. **phpmyadmin-mediawiki**
+- Este servicio configura **phpMyAdmin**, una interfaz web para administrar MySQL.
+- **`depends_on: mediawiki-db`**: Se asegura de que el contenedor `mediawiki-db` esté iniciado antes de arrancar.
+- **`image: phpmyadmin/phpmyadmin:5.2.1`**: Utiliza una imagen específica de phpMyAdmin (versión 5.2.1).
+- **`container_name: phpmyadmin-mediawiki`**: Asigna un nombre al contenedor para facilitar su identificación.
+- **`restart: always`**: Reinicia automáticamente si falla.
+- **`ports: 8180:80`**: Mapea el puerto 80 del contenedor al puerto 8180 del host.
+- **`environment`**:
+  - **`PMA_HOST`**: Dirección del servidor MySQL (`mediawiki-db`).
+  - **`MYSQL_ROOT_PASSWORD`**: Contraseña del usuario root de MySQL (`wikimedia`).
+
+---
+
+### Redes Definidas:
+
+#### **mediawiki_network**
+- **`driver: bridge`**: Crea una red de tipo **bridge** para que los contenedores definidos puedan comunicarse entre sí.
+
+---
+
+### ¿Qué hace este archivo?
+1. Crea un entorno completo para correr MediaWiki, incluyendo:
+   - Un contenedor MediaWiki (`mediawiki`) accesible en el puerto `8081`.
+   - Una base de datos MySQL (`mediawiki-db`) con credenciales preconfiguradas.
+   - Una herramienta de administración phpMyAdmin (`phpmyadmin-mediawiki`) accesible en el puerto `8180`.
+2. Asegura que todos los servicios puedan comunicarse entre sí a través de la red `mediawiki_network`.
+
+---
+
+### Potenciales Mejoras:
+1. **Persistencia de Datos**:
+   - Los volúmenes especificados (`/var/www/html/` y `/var/lib/`) deberían ser rutas específicas en el sistema para evitar confusión y pérdida de datos.
+
+2. **Seguridad**:
+   - No se deben exponer contraseñas directamente en el archivo. Usa archivos `.env` para manejar credenciales de manera segura.
+
+3. **Documentación**:
+   - Agregar comentarios para cada sección o credencial sería útil para futuros mantenedores.
+
+--------------------------------------------------------
+¿Qué es networks: mediawiki_network:?
+---------------
+La sección `networks` en un archivo de Docker Compose define redes virtuales que conectan contenedores para que puedan comunicarse entre ellos de manera segura y eficiente.
+
+---
+
+### **¿Qué es `networks: mediawiki_network:`?**
+
+- **`mediawiki_network:`** es el nombre de una red personalizada que se crea y administra mediante Docker.
+- En este caso, los servicios `mediawiki`, `mediawiki-db` y `phpmyadmin-mediawiki` están configurados para conectarse a esta red. Esto les permite comunicarse entre ellos utilizando nombres de contenedor como "hostnames" en lugar de direcciones IP (por ejemplo, `mediawiki-db` es accesible desde `mediawiki` y `phpmyadmin-mediawiki` como un hostname).
+
+---
+
+### **¿Cómo funciona?**
+
+1. **Creación de la Red**:
+   - Cuando ejecutas `docker-compose up`, Docker crea automáticamente la red definida (`mediawiki_network`) si no existe ya.
+   - Aquí, la red tiene un tipo de **bridge** (`driver: bridge`), que es el tipo de red predeterminado para redes personalizadas de Docker.
+
+2. **Conexión de Contenedores**:
+   - Los contenedores configurados para usar `mediawiki_network` se conectan automáticamente a esta red durante su inicio.
+   - Esto les permite comunicarse directamente entre ellos mediante sus nombres de servicio, como `mediawiki-db` o `mediawiki`.
+
+3. **Aislamiento**:
+   - Los contenedores en la red `mediawiki_network` están aislados del resto de la red del host y de otros contenedores que no están en la misma red.
+   - Esto mejora la seguridad y evita interferencias con otros proyectos.
+
+4. **Comunicación Interna**:
+   - Docker asigna direcciones IP a los contenedores en la red, pero no necesitas conocerlas porque Docker resuelve automáticamente los nombres de servicio como nombres de dominio (DNS). 
+     Ejemplo: `mediawiki` puede comunicarse con `mediawiki-db` usando el hostname `mediawiki-db`.
+
+---
+
+### **Ejemplo de Comunicación**
+
+Dentro de un contenedor que pertenece a esta red, puedes conectarte a otro contenedor usando el nombre del servicio:
+```bash
+mysql -h mediawiki-db -u wikimedia -p
+```
+
+Aquí:
+- `mediawiki-db` es el nombre del servicio definido en el archivo `compose.yml`.
+
+---
+
+### **Ventajas de usar redes personalizadas en Docker Compose**
+
+1. **Aislamiento**:
+   - Los contenedores de un proyecto no interactúan con otros contenedores o redes a menos que lo especifiques.
+
+2. **Facilidad de Configuración**:
+   - Usar nombres de servicio en lugar de direcciones IP hace que la configuración sea más sencilla y portátil.
+
+3. **Seguridad**:
+   - Limita el acceso externo, ya que solo los contenedores conectados a la misma red pueden comunicarse entre sí.
+
+4. **Escalabilidad**:
+   - Puedes agregar más servicios a la red sin afectar la comunicación existente.
+
+---
+
+### **Resumen de `mediawiki_network`**
+
+- **Es un espacio privado para los contenedores del proyecto.**
+- **Permite comunicación directa entre `mediawiki`, `mediawiki-db` y `phpmyadmin-mediawiki`.**
+- **Aísla el entorno del resto del sistema o de otros proyectos de Docker.**
+
+-------------------------------------------------------------
+La red mediawiki_network se crea automáticamente cuando ejecutas el comando:
+-------------------------------------------------------------
+bash
+Copiar código
+docker-compose up
+Docker Compose detecta que la red está definida en el archivo compose.yml pero no existe aún en el sistema, así que la crea en ese momento. Esto es parte del comportamiento predeterminado de Docker Compose cuando trabaja con redes definidas en un archivo de configuración.
+
+¿Cuándo y cómo se crea mediawiki_network?
+Al ejecutar docker-compose up:
+
+Si la red mediawiki_network no existe, Docker Compose la crea automáticamente antes de iniciar los contenedores.
+Si la red ya existe, Docker Compose la reutiliza.
+Quién la crea:
+
+Docker Compose se encarga de crear la red automáticamente basándose en la definición de redes en el archivo compose.yml.
+Donde se define:
+
+La red está definida en la sección networks del archivo compose.yml:
+
+yaml
+Copiar código
+networks:
+  mediawiki_network:
+    driver: bridge
+Configuración predeterminada:
+
+Si solo defines el nombre (como en el caso del ejemplo), Docker utiliza configuraciones predeterminadas, como el tipo de red bridge.
+¿Se ha creado antes?
+Si mediawiki_network ya existe: Docker Compose no la vuelve a crear. Simplemente conecta los contenedores a la red existente.
+Si no existe: Docker Compose la crea automáticamente al ejecutar docker-compose up.
+Puedes verificar si la red ya está creada en tu sistema con el comando:
+
+bash
+Copiar código
+docker network ls
+Esto mostrará una lista de todas las redes en Docker, y deberías ver algo como:
+
+sql
+Copiar código
+NETWORK ID     NAME                 DRIVER    SCOPE
+abcd1234efgh   mediawiki_network    bridge    local
+¿Cómo comprobar si se creó automáticamente?
+Docker Compose genera logs durante su ejecución. Si revisas los logs después de ejecutar docker-compose up, verás algo como esto si la red fue creada:
+
+csharp
+Copiar código
+Creating network "projectname_mediawiki_network" with driver "bridge"
+¿Es posible crearla antes manualmente?
+Sí, puedes crear la red manualmente antes de ejecutar docker-compose up con:
+
+bash
+Copiar código
+docker network create --driver bridge mediawiki_network
+Si haces esto, Docker Compose reutilizará la red que ya existe y no intentará crearla de nuevo.
+
+Resumen
+Quién la crea: Docker Compose se encarga automáticamente.
+Cuándo se crea: Al ejecutar docker-compose up, si la red no existe.
+Dónde se define: En el archivo compose.yml, en la sección networks.
+
+----------------------------
+Simular un entorno XAMPP completo con Docker es bastante sencillo utilizando un archivo docker-compose.yml para definir servicios equivalentes a Apache, PHP, MySQL, y phpMyAdmin. Aquí tienes una guía completa para hacerlo:
+----------------------------
+version: '3.8'
+
+services:
+  apache-php:
+    image: php:7.4-apache
+    container_name: xampp_apache_php
+    restart: always
+    ports:
+      - "8080:80" # Apache estará disponible en el puerto 8080
+    volumes:
+      - ./htdocs:/var/www/html # Montar el código PHP desde la carpeta local `htdocs`
+
+  mysql:
+    image: mysql:5.7
+    container_name: xampp_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: example_db
+      MYSQL_USER: example_user
+      MYSQL_PASSWORD: example_password
+    volumes:
+      - mysql_data:/var/lib/mysql # Persistencia de datos
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: xampp_phpmyadmin
+    restart: always
+    depends_on:
+      - mysql
+    environment:
+      PMA_HOST: mysql # Conecta con el servicio MySQL
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "8181:80" # phpMyAdmin estará disponible en el puerto 8181
+
+volumes:
+  mysql_data:
+
+�
