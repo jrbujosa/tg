@@ -1,0 +1,105 @@
+### Ejercicio para Aprender "HTML CSS Support" en Visual Studio Code
+
+La extensión "HTML CSS Support" en Visual Studio Code mejora la experiencia al trabajar con HTML y CSS, proporcionando autocompletado y sugerencias entre archivos relacionados. Este ejercicio ayudará a los estudiantes a familiarizarse con esta funcionalidad.
+
+---
+
+#### **Objetivo del Ejercicio**
+- Crear una página web básica con HTML y un archivo CSS separado.
+- Explorar cómo la extensión proporciona autocompletado para clases, IDs y estilos definidos en CSS.
+
+---
+
+#### **Instrucciones Paso a Paso**
+
+1. **Instalar la Extensión**
+   - Asegúrate de tener instalada la extensión "HTML CSS Support".
+   - Ve al Marketplace de extensiones de Visual Studio Code y busca "HTML CSS Support". Instálala si aún no la tienes.
+
+2. **Configurar un Proyecto Básico**
+   - Crea una nueva carpeta para el proyecto, por ejemplo, `html-css-support-demo`.
+   - Dentro de la carpeta, crea dos archivos:
+     - `index.html`
+     - `styles.css`
+
+3. **Escribir el Código HTML**
+   - En el archivo `index.html`, escribe lo siguiente:
+     ```html
+     <!DOCTYPE html>
+     <html lang="en">
+     <head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <title>HTML CSS Support Demo</title>
+         <link rel="stylesheet" href="styles.css">
+     </head>
+     <body>
+         <div class="container">
+             <h1 class="main-title">Bienvenido a HTML CSS Support</h1>
+             <p class="intro-text">Explora cómo el autocompletado mejora tu experiencia.</p>
+             <button class="cta-button">Haz clic aquí</button>
+         </div>
+     </body>
+     </html>
+     ```
+
+4. **Escribir el Código CSS**
+   - En el archivo `styles.css`, define algunos estilos:
+     ```css
+     .container {
+         text-align: center;
+         margin: 50px auto;
+         max-width: 600px;
+         background-color: #f9f9f9;
+         padding: 20px;
+         border-radius: 10px;
+         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+     }
+
+     .main-title {
+         font-size: 2rem;
+         color: #333;
+     }
+
+     .intro-text {
+         font-size: 1rem;
+         color: #555;
+     }
+
+     .cta-button {
+         padding: 10px 20px;
+         background-color: #007bff;
+         color: white;
+         border: none;
+         border-radius: 5px;
+         cursor: pointer;
+     }
+
+     .cta-button:hover {
+         background-color: #0056b3;
+     }
+     ```
+
+5. **Explorar el Autocompletado**
+   - Abre el archivo `index.html` en Visual Studio Code.
+   - Dentro de las etiquetas `class` o `id`, escribe parte de una clase o ID definido en `styles.css` (por ejemplo, `cta-`) y observa cómo se muestran sugerencias automáticas.
+
+6. **Probar la Página**
+   - Usa la extensión **Live Server** o abre el archivo `index.html` directamente en un navegador para ver el resultado visual.
+
+---
+
+#### **Tareas Adicionales**
+1. Cambia o agrega nuevas clases en el archivo `styles.css` y verifica si las sugerencias en `index.html` se actualizan.
+2. Agrega estilos para un estado `:hover` o un media query y verifica cómo se comporta el autocompletado.
+
+---
+
+**Resultado Esperado**
+Los estudiantes comprenderán cómo funciona la extensión "HTML CSS Support" para conectar archivos HTML y CSS, mejorando la productividad en el desarrollo web.
+
+---
+
+**Sugerencias**
+**a.** ¿Deseas extender el ejercicio para incluir JavaScript y eventos interactivos?  
+**b.** ¿Quieres ejemplos de depuración de CSS con herramientas del navegador?
