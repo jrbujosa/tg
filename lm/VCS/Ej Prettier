@@ -1,0 +1,71 @@
+Aquí tienes un ejercicio sencillo para que los estudiantes aprendan a usar **Prettier** en **Visual Studio Code (VS Code)**:
+
+---
+
+### Ejercicio: Configuración y Uso de Prettier en VS Code
+
+#### Objetivo:
+- Configurar Prettier como formateador en VS Code.
+- Practicar el uso de Prettier para formatear código automáticamente.
+
+---
+
+#### Instrucciones:
+
+1. **Prepara tu entorno**:
+   - Instala **Visual Studio Code** si aún no lo tienes.
+   - Ve a la sección de extensiones en VS Code (`Ctrl+Shift+X` o `Cmd+Shift+X` en macOS) e instala la extensión **Prettier - Code formatter**.
+   - Verifica que Prettier está correctamente instalado.
+
+2. **Configura Prettier**:
+   - Ve a los ajustes de VS Code (`Ctrl+,` o `Cmd+,`) y busca "Default Formatter".
+   - Selecciona **Prettier** como el formateador por defecto.
+   - Habilita la opción **Editor: Format On Save** en los ajustes para que Prettier formatee el código automáticamente al guardar.
+
+3. **Crea un archivo de configuración de Prettier (opcional)**:
+   - En tu proyecto, crea un archivo llamado `.prettierrc`.
+   - Escribe la siguiente configuración básica:
+     ```json
+     {
+       "singleQuote": true,
+       "semi": false,
+       "tabWidth": 2
+     }
+     ```
+
+4. **Escribe código sin formato**:
+   - Crea un archivo JavaScript llamado `example.js`.
+   - Copia y pega el siguiente código desordenado:
+     ```javascript
+     function greet(name){console.log("Hello, "+name+"!");}
+     greet("World");
+     ```
+
+5. **Aplica Prettier**:
+   - Guarda el archivo (`Ctrl+S` o `Cmd+S`).
+   - Observa cómo Prettier formatea automáticamente el código para que sea más legible:
+     ```javascript
+     function greet(name) {
+       console.log('Hello, ' + name + '!')
+     }
+     greet('World')
+     ```
+
+6. **Experimenta con las configuraciones**:
+   - Modifica las reglas en el archivo `.prettierrc` (por ejemplo, cambia `"semi": false` a `"semi": true`) y guarda el archivo de nuevo.
+   - Observa cómo Prettier ajusta el formato según las configuraciones.
+
+---
+
+#### Evaluación:
+1. ¿Lograste instalar y configurar Prettier correctamente?
+2. ¿El código fue formateado automáticamente al guardar?
+3. ¿Entendiste cómo afecta la configuración en el archivo `.prettierrc` al formato del código?
+
+---
+
+**Extensión**:
+- Prueba a formatear otros tipos de archivo como HTML o CSS con Prettier.
+- Integra Prettier con ESLint para mejorar la calidad del código.
+
+¿Te gustaría un ejemplo más avanzado de integración o configuración? 😊
