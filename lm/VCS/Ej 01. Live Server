@@ -1,0 +1,91 @@
+### Ejercicio: Crear y ejecutar un servidor en vivo usando Live Server en Visual Studio Code
+
+Este ejercicio está diseñado para enseñar a los estudiantes cómo instalar, configurar y usar **Live Server** en Visual Studio Code. Les permitirá ejecutar un proyecto HTML básico en un navegador con actualización en tiempo real.
+
+---
+
+### **Objetivo**
+Configurar un proyecto básico de HTML y visualizarlo en el navegador utilizando Live Server.
+
+---
+
+### **Pasos del Ejercicio**
+
+1. **Preparación del entorno**
+   - Abre **Visual Studio Code**.
+   - Crea una nueva carpeta para tu proyecto (por ejemplo: `ProyectoLiveServer`) y ábrela en Visual Studio Code.
+
+2. **Crear los archivos básicos**
+   - Dentro de la carpeta del proyecto, crea un archivo llamado `index.html`.
+   - Añade el siguiente contenido al archivo `index.html`:
+
+     ```html
+     <!DOCTYPE html>
+     <html lang="es">
+     <head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <title>Ejercicio Live Server</title>
+     </head>
+     <body>
+         <h1>Hola, mundo!</h1>
+         <p>Este es un ejercicio con Live Server.</p>
+     </body>
+     </html>
+     ```
+
+3. **Instalar Live Server**
+   - Ve a la sección de **Extensiones** en Visual Studio Code (icono de cuadrados en la barra lateral izquierda).
+   - Busca `Live Server` en la barra de búsqueda.
+   - Haz clic en **Instalar** para agregar la extensión.
+
+4. **Iniciar el servidor en vivo**
+   - Haz clic derecho en el archivo `index.html` en el explorador de archivos de VS Code.
+   - Selecciona la opción **Open with Live Server**.
+   - Esto abrirá tu archivo `index.html` en tu navegador predeterminado.
+
+5. **Probar la actualización en tiempo real**
+   - Cambia el contenido del archivo `index.html`. Por ejemplo, reemplaza `<h1>Hola, mundo!</h1>` con `<h1>Hola, estudiantes!</h1>`.
+   - Guarda el archivo (`Ctrl+S` o `Cmd+S`).
+   - Observa cómo el navegador se actualiza automáticamente para reflejar los cambios.
+
+---
+
+### **Tareas adicionales**
+1. Añade un archivo `style.css` y enlázalo con el archivo HTML:
+   - Crea un archivo `style.css` con el siguiente contenido:
+
+     ```css
+     body {
+         font-family: Arial, sans-serif;
+         background-color: #f0f0f0;
+         color: #333;
+         text-align: center;
+         margin: 20px;
+     }
+     h1 {
+         color: #0078d7;
+     }
+     ```
+
+   - Enlaza el archivo CSS en tu `index.html` agregando esta línea dentro de la etiqueta `<head>`:
+
+     ```html
+     <link rel="stylesheet" href="style.css">
+     ```
+
+2. Experimenta agregando más elementos HTML y estilizándolos con CSS.
+
+---
+
+### **Resultados esperados**
+- Los estudiantes habrán aprendido a:
+  - Configurar un proyecto básico en Visual Studio Code.
+  - Instalar y usar Live Server.
+  - Observar actualizaciones en tiempo real en el navegador.
+  
+**Opcional:** Explorar cómo usar Live Server con proyectos más complejos como aquellos que contienen JavaScript.
+
+---
+
+**¿Quieres más ejemplos o tareas relacionadas con Live Server?**
