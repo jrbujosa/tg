@@ -1,0 +1,106 @@
+### Práctica Sencilla: Instalación y Uso de Wifite para Auditorías Wi-Fi en Ubuntu
+
+#### Objetivo:
+Aprender a instalar y utilizar **Wifite**, una herramienta automatizada para auditorías Wi-Fi, en sistemas basados en Ubuntu. Este ejercicio es solo con fines educativos y debe realizarse en redes propias o con autorización explícita.
+
+---
+
+### **Instrucciones**
+
+#### **1. Preparación del Entorno**
+
+Antes de comenzar, asegúrate de:
+- Tener Ubuntu instalado y actualizado.
+- Contar con privilegios de administrador (`sudo`).
+- Poseer una tarjeta de red compatible con modo monitor.
+
+---
+
+#### **2. Instalación de Dependencias**
+Ejecuta los siguientes comandos en la terminal para instalar las herramientas necesarias:
+
+```bash
+sudo apt update
+sudo apt install git python3 python3-pip aircrack-ng
+```
+
+- **`git`**: Para clonar el repositorio de Wifite.
+- **`python3` y `python3-pip`**: Para ejecutar el script de Wifite.
+- **`aircrack-ng`**: Para soporte en auditorías Wi-Fi.
+
+---
+
+#### **3. Descarga e Instalación de Wifite**
+
+Clona el repositorio oficial de Wifite desde GitHub e instálalo:
+
+```bash
+git clone https://github.com/derv82/wifite2.git
+cd wifite2
+sudo python3 setup.py install
+```
+
+---
+
+#### **4. Configuración de la Tarjeta de Red**
+Habilita el modo monitor para tu tarjeta de red:
+
+1. Identifica el nombre de tu tarjeta de red inalámbrica:
+   ```bash
+   iwconfig
+   ```
+   Busca el dispositivo con el estado `ESSID`.
+
+2. Activa el modo monitor usando `airmon-ng`:
+   ```bash
+   sudo airmon-ng start wlan0
+   ```
+   Cambia `wlan0` por el nombre de tu dispositivo.
+
+---
+
+#### **5. Ejecución de Wifite**
+
+Lanza Wifite desde la terminal:
+```bash
+sudo wifite
+```
+
+- Wifite escaneará automáticamente las redes disponibles y mostrará una lista.
+- Elige una red objetivo ingresando su número.
+- La herramienta intentará realizar un ataque (como WPA handshake capture).
+
+---
+
+#### **6. Captura y Análisis**
+
+1. Una vez que Wifite capture un **handshake**, guárdalo en un archivo `.cap`.
+   - El archivo se almacenará en `/tmp` o la ubicación especificada en los resultados.
+
+2. Usa **aircrack-ng** para analizar el handshake:
+   ```bash
+   aircrack-ng -w /ruta/diccionario.txt /ruta/archivo.cap
+   ```
+
+   Cambia `/ruta/diccionario.txt` por el diccionario de claves que deseas usar y `/ruta/archivo.cap` por el archivo generado.
+
+---
+
+### **Evaluación**
+1. ¿Pudiste instalar Wifite sin problemas?
+2. ¿Lograste iniciar un escaneo de redes?
+3. ¿Entendiste el proceso de captura de handshakes y su análisis?
+
+---
+
+### **Notas Importantes**
+- Realiza esta práctica solo en redes que posees o administras.
+- El uso indebido de herramientas de auditoría Wi-Fi es ilegal.
+
+---
+
+#### **Extensiones del Ejercicio**
+1. Agrega configuraciones avanzadas a Wifite como el uso de diccionarios personalizados.
+2. Prueba otras herramientas como **Kismet** o **Bettercap** para complementar tu aprendizaje.
+
+¿Te gustaría explorar alguna configuración avanzada de Wifite o integrar herramientas adicionales? 😊
