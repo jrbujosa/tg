@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interacción DOM y Consola</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin-top: 50px;
+        }
+        button {
+            background-color: blue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: green;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interacción DOM y Consola</h1>
+    <p>Este es un ejemplo básico de manipulación del DOM.</p>
+    <button id="miBoton">Haz clic aquí</button>
+    <div id="resultado"></div>
+
+    <script>
+        document.getElementById("miBoton").addEventListener("click", function() {
+            // Cambia el contenido del <div>
+            document.getElementById("resultado").innerText = "¡Has hecho clic en el botón! El DOM ha sido manipulado.";
+
+            // Muestra un mensaje en la consola
+            console.log("Mensaje desde JavaScript: El botón fue presionado.");
+
+            // Cambia el estilo del texto
+            document.getElementById("resultado").style.color = "red";
+        });
+    </script>
+</body>
+</html>
