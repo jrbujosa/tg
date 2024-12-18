@@ -4,7 +4,7 @@ https://<tu-wiki>/index.php?title=Template:MiPlantilla
 
 Escribir el contenido de la plantilla:
 
-Hola, {{1}}. Bienvenido a {{2}}.
+Hola, {{{1}}}. Bienvenido a {{{2}}}.
 
 Haz clic en "Guardar página" para crear la plantilla.
 
