@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exploración del Nodo DOM</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin-top: 20px;
+        }
+        #contenedor {
+            border: 1px solid black;
+            padding: 10px;
+            margin: 20px auto;
+            width: 50%;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Exploración del Nodo DOM</h1>
+    <p id="descripcion">Este párrafo será el nodo que exploraremos.</p>
+    <div id="contenedor">
+        <p>Contenido extra dentro del contenedor.</p>
+    </div>
+    <button id="btnExplorar">Explorar Nodo</button>
+
+    <script>
+        document.getElementById("btnExplorar").addEventListener("click", function() {
+            // 1. Acceder al nodo con ID "descripcion"
+            const nodo = document.getElementById("descripcion");
+
+            // 2. Imprimir en consola el nodo
+            console.log("Nodo seleccionado:", nodo);
+
+            // 3. Mostrar sus atributos más importantes
+            console.log("Nombre del nodo:", nodo.nodeName);
+            console.log("Tipo de nodo:", nodo.nodeType);
+            console.log("Contenido del nodo:", nodo.textContent);
+            console.log("Atributos del nodo:", nodo.attributes);
+
+            // 4. Mostrar en pantalla un resumen
+            const resultado = `
+                <strong>Nombre del nodo:</strong> ${nodo.nodeName} <br>
+                <strong>Tipo de nodo:</strong> ${nodo.nodeType} <br>
+                <strong>Contenido del nodo:</strong> ${nodo.textContent} <br>
+                <strong>Total de atributos:</strong> ${nodo.attributes.length}
+            `;
+            const contenedor = document.getElementById("contenedor");
+            contenedor.innerHTML = resultado;
+
+            // 5. Listar todos los métodos disponibles en el nodo
+            console.log("Métodos disponibles en el nodo:");
+            for (let key in nodo) {
+                if (typeof nodo[key] === "function") {
+                    console.log(key);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
