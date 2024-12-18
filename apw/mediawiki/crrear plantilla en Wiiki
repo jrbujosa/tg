@@ -1,0 +1,20 @@
+Crear la página de la plantilla:
+
+https://<tu-wiki>/index.php?title=Template:MiPlantilla
+
+Escribir el contenido de la plantilla:
+
+Hola, {{1}}. Bienvenido a {{2}}.
+
+Haz clic en "Guardar página" para crear la plantilla.
+
+Usar la plantilla:
+
+{{MiPlantilla|Juan|el wiki de prueba}}
+
+=======
+Características avanzadas de las plantillas
+
+Hola, {{nombre}}. Bienvenido a {{sitio}}.
+Uso:
+{{MiPlantilla|nombre=Juan|sitio=el wiki de prueba}}
